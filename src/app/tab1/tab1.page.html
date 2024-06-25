@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tareas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/task']">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let task of tasks">
+      <ion-label>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+        <p>{{ task.dueDate | date }}</p>
+      </ion-label>
+      <ion-button (click)="markAsCompleted(task)" *ngIf="!task.completed">Complete</ion-button>
+      <ion-icon name="checkmark-circle-outline" *ngIf="task.completed"></ion-icon>
+      <ion-button (click)="deleteTask(task.id)">Delete</ion-button>
+      <ion-button (click)="editTask(task.id)">Editar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+
+
+<!-- <div>
+  <h1>Lista de Tareas</h1>
+  <ul>
+    <li *ngFor="let task of tasks">
+      <span [class.completed]="task.completed">{{ task.title }}</span>
+      <button (click)="toggleCompletion(task.id)">
+        {{ task.completed ? 'Desmarcar' : 'Marcar' }} como completada
+      </button>
+      <button (click)="editTask(task.id)">Editar</button>
+    </li>
+  </ul>
+  <button (click)="addTask()">Agregar Tarea</button>
+</div>
+
+<!-- Añade un poco de estilo para mostrar las tareas completadas -->
+
